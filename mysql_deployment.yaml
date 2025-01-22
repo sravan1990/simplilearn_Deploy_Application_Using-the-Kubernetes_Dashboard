@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: simplilearn-project7
+  creationTimestamp: null
+  labels:
+    app: mydb1
+  name: mydb1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydb1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mydb1
+    spec:
+      containers:
+      - image: docker.io/mysql:5.7
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom: 
+            secretKeyRef:
+              key: mypass
+              name: mysecret
+        - name: MYSQL_DATABASE
+          value: niit
+        volumeMounts:
+        - name: volume1
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: volume1
+        persistentVolumeClaim:
+         claimName: mypvc1
+status: {}

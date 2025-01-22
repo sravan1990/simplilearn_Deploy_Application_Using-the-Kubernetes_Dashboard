@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  myusername: 'root'
+kind: ConfigMap
+metadata:
+  namespace: simplilearn-project7
+  creationTimestamp: null
+  name: envcm
